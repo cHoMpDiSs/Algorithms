@@ -8,14 +8,21 @@ def create_array(size = 10, max = 50):
 
 def partition(a, low, high): # partition divides the array into two parts
 
-    i = low -1
+    i = low # setting our pointers
+    j = high -1
     pivot = a[high]
-    for j in range(low,high):
-        if a[j] <= pivot:
+    while i < j: # i and j never cross
+        while i < high and a[i] < pivot: #searching for values to swap
             i += 1
-            a[i],a[j] = a[j],a[i]  
-    a[i+1],a[high] = a[high],a[i+1]
-    return i+1
+        while j > low and a[j] >= pivot:
+            j -= 1
+        if i < j:
+            a[i], a[j] = a[j], a[i] # swapping values
+        
+    if a[i] > pivot:
+        a[i], a[high] = a[high],a[i] # changing pivot
+    return i
+
 
 def quicksort(a, low=0, high=None):
     if high == None:
